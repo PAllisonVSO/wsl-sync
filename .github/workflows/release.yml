@@ -22,7 +22,7 @@ jobs:
       - run: npm test
 
       - name: Create GitHub Release
-        run: gh release create "${{ github.ref_name }}" --generate-notes
+        run: gh release create "${{ github.ref_name }}" --generate-notes || echo "Release already exists, skipping"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

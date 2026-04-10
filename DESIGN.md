@@ -1,4 +1,4 @@
-# wsl-sync — Design Document
+# wsl-fsync — Design Document
 
 **Version:** 1.0.0 | **Date:** 2026-04-10
 
@@ -16,7 +16,7 @@ drives are already mounted at /mnt/c/, /mnt/d/ etc via 9P.
 ## Components
 
 - cli.ts      — Commander.js subcommands
-- config.ts   — JSON config CRUD at ~/.config/wsl-sync/config.json
+- config.ts   — JSON config CRUD at ~/.config/wsl-fsync/config.json
 - daemon.ts   — Chokidar watcher per pair + per-file debounce timer map
 - syncer.ts   — fullSync (initial) + syncFile (incremental) with delta detection
 - logger.ts   — Chalk console output + optional file logging
