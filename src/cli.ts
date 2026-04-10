@@ -18,9 +18,9 @@ import { writePid, readPid, clearPid, isRunning } from './pid';
 const program = new Command();
 
 program
-  .name('wsl-sync')
+  .name('wsl-fsync')
   .description('WSL2 folder watcher → Windows file sync')
-  .version('1.0.0')
+  .version(require('../package.json').version)
   .showHelpAfterError(true)
   .configureHelp({
     subcommandTerm(cmd) {

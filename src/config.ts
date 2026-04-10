@@ -17,7 +17,7 @@ export interface Config {
   logFile: string;
 }
 
-const CONFIG_DIR = path.join(os.homedir(), '.config', 'wsl-sync');
+const CONFIG_DIR = path.join(os.homedir(), '.config', 'wsl-fsync');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 
 const DEFAULT_CONFIG: Config = {

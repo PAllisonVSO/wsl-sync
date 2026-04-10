@@ -1,4 +1,4 @@
-# wsl-sync
+# wsl-fsync
 
 Real-time, one-way file sync from WSL2 to Windows.
 
@@ -12,17 +12,17 @@ Windows filesystem watchers (`ReadDirectoryChangesW`) cannot see inotify events 
 
 ```bash
 npm install && npm run build
-npm link   # makes `wsl-sync` available globally
+npm link   # makes `wsl-fsync` available globally
 ```
 
 ## Quick start
 
 ```bash
 # 1. Add a sync pair
-wsl-sync add --source ~/dev/myproject/dist --dest /mnt/c/Users/You/sync/myproject
+wsl-fsync add --source ~/dev/myproject/dist --dest /mnt/c/Users/You/sync/myproject
 
 # 2. Start watching (runs initial full sync, then watches for changes)
-wsl-sync start
+wsl-fsync start
 
 # 3. That's it — edits in ~/dev/myproject/dist are copied to Windows in real time
 ```
@@ -32,11 +32,11 @@ wsl-sync start
 ### Managing sync pairs
 
 ```
-wsl-sync add -s <source> -d <dest>   Add a new sync pair
-wsl-sync remove <id>                 Remove a pair by ID
-wsl-sync enable <id>                 Enable a disabled pair
-wsl-sync disable <id>                Disable a pair (keeps config)
-wsl-sync list                        List all configured pairs
+wsl-fsync add -s <source> -d <dest>   Add a new sync pair
+wsl-fsync remove <id>                 Remove a pair by ID
+wsl-fsync enable <id>                 Enable a disabled pair
+wsl-fsync disable <id>                Disable a pair (keeps config)
+wsl-fsync list                        List all configured pairs
 ```
 
 **`add` options:**
@@ -52,22 +52,22 @@ wsl-sync list                        List all configured pairs
 ### Syncing
 
 ```
-wsl-sync sync [id]                   One-shot full sync (all enabled pairs, or one by ID)
-wsl-sync sync --dry-run              Show what would be synced without copying
-wsl-sync start                       Start watching all enabled pairs
-wsl-sync start --daemon              Run in the background (logs to ~/.config/wsl-sync/daemon.log)
-wsl-sync start --no-sync-on-start   Skip the initial full sync
-wsl-sync start --debug               Verbose logging
-wsl-sync stop                        Stop the background daemon
-wsl-sync status                      Show daemon status and configured pairs
+wsl-fsync sync [id]                   One-shot full sync (all enabled pairs, or one by ID)
+wsl-fsync sync --dry-run              Show what would be synced without copying
+wsl-fsync start                       Start watching all enabled pairs
+wsl-fsync start --daemon              Run in the background (logs to ~/.config/wsl-fsync/daemon.log)
+wsl-fsync start --no-sync-on-start   Skip the initial full sync
+wsl-fsync start --debug               Verbose logging
+wsl-fsync stop                        Stop the background daemon
+wsl-fsync status                      Show daemon status and configured pairs
 ```
 
 ### Other
 
 ```
-wsl-sync config                      Show config file location and contents
-wsl-sync <command> ?                 Show detailed help for a command
-wsl-sync <command> --help            Same as above
+wsl-fsync config                      Show config file location and contents
+wsl-fsync <command> ?                 Show detailed help for a command
+wsl-fsync <command> --help            Same as above
 ```
 
 ## How it works
@@ -79,10 +79,10 @@ wsl-sync <command> --help            Same as above
 
 ## Config
 
-All configuration is stored in `~/.config/wsl-sync/config.json`. You can edit it directly or use the CLI commands.
+All configuration is stored in `~/.config/wsl-fsync/config.json`. You can edit it directly or use the CLI commands.
 
 ```
-~/.config/wsl-sync/
+~/.config/wsl-fsync/
   config.json    # sync pair definitions
   daemon.pid     # PID file when running as daemon
   daemon.log     # log output when running as daemon
