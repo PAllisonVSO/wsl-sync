@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "WSL2 folder watcher and Windows sync tool",
   "main": "dist/cli.js",
+  "files": ["dist"],
   "bin": {
     "wsl-sync": "./dist/cli.js"
   },
@@ -10,7 +11,8 @@
     "build": "tsc",
     "dev": "ts-node src/cli.ts",
     "start": "node dist/cli.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
