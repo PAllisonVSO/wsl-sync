@@ -1,0 +1,26 @@
+{
+  "name": "wsl-sync",
+  "version": "0.1.0",
+  "description": "WSL2 folder watcher and Windows sync tool",
+  "main": "dist/cli.js",
+  "bin": {
+    "wsl-sync": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "start": "node dist/cli.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "commander": "^12.1.0",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "vitest": "^3.1.1"
+  }
+}
