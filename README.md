@@ -11,8 +11,16 @@ Windows filesystem watchers (`ReadDirectoryChangesW`) cannot see inotify events 
 ## Install
 
 ```bash
+npm install -g wsl-fsync
+```
+
+Or from source:
+
+```bash
+git clone https://github.com/PAllisonVSO/wsl-fsync.git
+cd wsl-fsync
 npm install && npm run build
-npm link   # makes `wsl-fsync` available globally
+npm link
 ```
 
 ## Quick start
