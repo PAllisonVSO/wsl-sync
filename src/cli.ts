@@ -21,6 +21,7 @@ program
   .name('wsl-sync')
   .description('WSL2 folder watcher → Windows file sync')
   .version('1.0.0')
+  .showHelpAfterError(true)
   .configureHelp({
     subcommandTerm(cmd) {
       const args = cmd.registeredArguments.map((a) => a.name()).join(' ');
@@ -260,5 +261,20 @@ program
       log.warn('No config file yet. Use `wsl-sync add` to create one.');
     }
   });
+
+// Treat trailing '?' as --help for any command
+const args = process.argv.slice(2);
+if (args.length >= 1 && args[args.length - 1] === '?') {
+  const cmdName = args[0] === '?' ? undefined : args[0];
+  if (cmdName) {
+    const cmd = program.commands.find(
+      (c) => c.name() === cmdName || c.aliases().includes(cmdName)
+    );
+    if (cmd) {
+      cmd.help();
+    }
+  }
+  program.help();
+}
 
 program.parse(process.argv);
