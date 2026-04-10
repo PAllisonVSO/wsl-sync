@@ -75,6 +75,32 @@ program
   });
 
 program
+  .command('edit <id>')
+  .usage('<id> [options]')
+  .description('Edit an existing sync pair')
+  .option('-s, --source <path>', 'New source folder')
+  .option('-d, --dest <path>', 'New destination folder')
+  .option('-e, --exclude <patterns...>', 'Replace exclude patterns')
+  .option('--debounce <ms>', 'New debounce delay in milliseconds')
+  .action((id, opts) => {
+    const config = loadConfig();
+    const pair = config.pairs.find((p) => p.id === id);
+    if (!pair) { log.error(`No pair found: ${id}`); process.exit(1); }
+
+    if (opts.source) pair.source = path.resolve(opts.source);
+    if (opts.dest) pair.dest = path.resolve(opts.dest);
+    if (opts.exclude) pair.exclude = opts.exclude;
+    if (opts.debounce) pair.debounceMs = parseInt(opts.debounce, 10);
+
+    saveConfig(config);
+    log.success(`Updated pair "${id}"`);
+    log.info(`  Source  : ${pair.source}`);
+    log.info(`  Dest    : ${pair.dest}`);
+    log.info(`  Exclude : ${pair.exclude.length > 0 ? pair.exclude.join(', ') : '(none)'}`);
+    log.info(`  Debounce: ${pair.debounceMs}ms`);
+  });
+
+program
   .command('remove <id>')
   .alias('rm')
   .description('Remove a sync pair by ID')
