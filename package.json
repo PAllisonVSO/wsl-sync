@@ -1,9 +1,11 @@
 {
   "name": "wsl-sync",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WSL2 folder watcher and Windows sync tool",
   "main": "dist/cli.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bin": {
     "wsl-sync": "./dist/cli.js"
   },
