@@ -201,12 +201,13 @@ program
     const config = loadConfig();
     initLogger(config.logFile, opts.debug);
 
+    const existingPid = readPid(config.pidFile);
+    if (existingPid && isRunning(existingPid)) {
+      log.warn(`wsl-fsync is already running (PID ${existingPid})`);
+      process.exit(0);
+    }
+
     if (opts.daemon) {
-      const pid = readPid(config.pidFile);
-      if (pid && isRunning(pid)) {
-        log.warn(`Daemon already running (PID ${pid})`);
-        process.exit(0);
-      }
       const { spawn } = require('child_process');
       const logStream = fs.openSync(config.logFile, 'a');
       const child = spawn(
