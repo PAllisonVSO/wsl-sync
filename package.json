@@ -21,6 +21,15 @@
     "commander": "^12.1.0",
     "chalk": "^4.1.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PAllisonVSO/wsl-fsync.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PAllisonVSO/wsl-fsync/issues"
+  },
+  "homepage": "https://github.com/PAllisonVSO/wsl-fsync#readme",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^5.4.5",
     "@types/node": "^20.0.0",
