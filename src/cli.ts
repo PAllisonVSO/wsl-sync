@@ -201,10 +201,12 @@ program
     const config = loadConfig();
     initLogger(config.logFile, opts.debug);
 
-    const existingPid = readPid(config.pidFile);
-    if (existingPid && isRunning(existingPid)) {
-      log.warn(`wsl-fsync is already running (PID ${existingPid})`);
-      process.exit(0);
+    if (process.env.WSL_FSYNC_DAEMON_CHILD !== '1') {
+      const existingPid = readPid(config.pidFile);
+      if (existingPid && isRunning(existingPid)) {
+        log.warn(`wsl-fsync is already running (PID ${existingPid})`);
+        process.exit(0);
+      }
     }
 
     if (opts.daemon) {
@@ -213,7 +215,11 @@ program
       const child = spawn(
         process.execPath,
         [process.argv[1], 'start', ...(opts.syncOnStart ? [] : ['--no-sync-on-start'])],
-        { detached: true, stdio: ['ignore', logStream, logStream] }
+        {
+          detached: true,
+          stdio: ['ignore', logStream, logStream],
+          env: { ...process.env, WSL_FSYNC_DAEMON_CHILD: '1' },
+        }
       );
       child.unref();
       log.success(`Daemon started (PID ${child.pid})`);
